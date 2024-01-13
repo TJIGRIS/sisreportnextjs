@@ -1,44 +1,43 @@
-"use client"
+'use client';
 
 import { Fragment } from 'react';
-import { useForm } from 'react-hook-form'
-import { Toaster, toast } from 'sonner'
-
+import { useForm } from 'react-hook-form';
+import { Toaster, toast } from 'sonner';
 
 export default function FormReport() {
-
-  function createReportesApi() {
-
-  }
+  function createReportesApi() {}
 
   const createReportes = async (data) => {
     try {
-      const res = await createReportesApi(data)
+      const res = await createReportesApi(data);
       if (res.statusText) {
-        toast.success('Reporte exitoso')
+        toast.success('Reporte exitoso');
       }
     } catch (error) {
-      toast.error('Reporte Fallido')
+      toast.error('Reporte Fallido');
     }
-  }
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
-  } = useForm()
+    reset,
+  } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    createReportes(data)
-    reset()
-  })
+    createReportes(data);
+    reset();
+  });
 
   return (
     <Fragment>
-      <form className='flex flex-col gap-4' onSubmit={onSubmit}>
+      <form
+        className='flex flex-col gap-4'
+        onSubmit={onSubmit}
+      >
         <div className='flex flex-col'>
-          <label htmlFor="ccEst">Numero de identificación</label>
+          <label htmlFor='ccEst'>Numero de identificación</label>
           <input
             type='number'
             {...register('ccEst', { required: true })}
@@ -48,7 +47,10 @@ export default function FormReport() {
             className='bg-white/40 text-white outline-none p-1'
           />
           {errors.ccEst?.type === 'required' && (
-            <p role='alert' className='text-quaternary'>
+            <p
+              role='alert'
+              className='text-quaternary'
+            >
               Numero de identificación invalido
             </p>
           )}
@@ -59,14 +61,38 @@ export default function FormReport() {
             <label htmlFor='sede'>Seleccione la sede</label>
             <select
               {...register('sede', { required: true })}
-              className='bg-white/40 outline-none p-1  text-white'>
-              <option className='text-black' value=''>seleccionar</option>
-              <option className='text-black' value='Casa Obando'>Casa Obando</option>
-              <option className='text-black' value='Bicentenario'>Bicentenario</option>
-              <option className='text-black' value='sede 3'>Sede 3</option>
+              className='bg-white/40 outline-none p-1  text-white'
+            >
+              <option
+                className='text-black'
+                value=''
+              >
+                seleccionar
+              </option>
+              <option
+                className='text-black'
+                value='Casa Obando'
+              >
+                Casa Obando
+              </option>
+              <option
+                className='text-black'
+                value='Bicentenario'
+              >
+                Bicentenario
+              </option>
+              <option
+                className='text-black'
+                value='sede 3'
+              >
+                Sede 3
+              </option>
             </select>
             {errors.sede?.type === 'required' && (
-              <p role='alert' className='text-quaternary'>
+              <p
+                role='alert'
+                className='text-quaternary'
+              >
                 Seleccione una sede
               </p>
             )}
@@ -76,14 +102,38 @@ export default function FormReport() {
             <label htmlFor='salon'>Número del Salón</label>
             <select
               {...register('salon', { required: true })}
-              className='bg-white/40 outline-none p-1 text-white'>
-              <option className='text-black' value=''>seleccionar</option>
-              <option className='text-black' value='1'>salón 1</option>
-              <option className='text-black' value='2'>salón 2</option>
-              <option className='text-black' value='3'>salón 3</option>
+              className='bg-white/40 outline-none p-1 text-white'
+            >
+              <option
+                className='text-black'
+                value=''
+              >
+                seleccionar
+              </option>
+              <option
+                className='text-black'
+                value='1'
+              >
+                salón 1
+              </option>
+              <option
+                className='text-black'
+                value='2'
+              >
+                salón 2
+              </option>
+              <option
+                className='text-black'
+                value='3'
+              >
+                salón 3
+              </option>
             </select>
             {errors.salon?.type === 'required' && (
-              <p role='alert' className='text-quaternary'>
+              <p
+                role='alert'
+                className='text-quaternary'
+              >
                 Seleccione un salón
               </p>
             )}
@@ -93,14 +143,38 @@ export default function FormReport() {
             <label htmlFor='numeroComputador'>Número de computador</label>
             <select
               {...register('numeroComputador', { required: true })}
-              className='bg-white/40 outline-none p-1 text-white'>
-              <option className='text-black' value=''>seleccionar</option>
-              <option className='text-black' value='1'>computador 1</option>
-              <option className='text-black' value='2'>computador 2</option>
-              <option className='text-black' value='3'>computador 3</option>
+              className='bg-white/40 outline-none p-1 text-white'
+            >
+              <option
+                className='text-black'
+                value=''
+              >
+                seleccionar
+              </option>
+              <option
+                className='text-black'
+                value='1'
+              >
+                computador 1
+              </option>
+              <option
+                className='text-black'
+                value='2'
+              >
+                computador 2
+              </option>
+              <option
+                className='text-black'
+                value='3'
+              >
+                computador 3
+              </option>
             </select>
             {errors.numeroComputador?.type === 'required' && (
-              <p role='alert' className='text-quaternary'>
+              <p
+                role='alert'
+                className='text-quaternary'
+              >
                 Seleccione un computador
               </p>
             )}
@@ -113,9 +187,13 @@ export default function FormReport() {
             {...register('description', { required: true })}
             rows='10'
             className='bg-white/40 outline-none p-1  text-white'
-            placeholder='Este equipo no ...'></textarea>
+            placeholder='Este equipo no ...'
+          ></textarea>
           {errors.description?.type === 'required' && (
-            <p role='alert' className='text-quaternary'>
+            <p
+              role='alert'
+              className='text-quaternary'
+            >
               Falta descripción del reporte
             </p>
           )}
@@ -123,13 +201,13 @@ export default function FormReport() {
 
         <button
           type='submit'
-          className='bg-primary w-max text-black rounded-lg py-2 px-6 hover:bg-primary/60 hover:text-white'>
+          className='bg-primary w-max text-black rounded-lg py-2 px-6 hover:bg-primary/60 hover:text-white'
+        >
           Enviar Reporte
         </button>
-
       </form>
 
       <Toaster richColors />
     </Fragment>
-  )
+  );
 }

@@ -1,27 +1,30 @@
-"use client"
+'use client';
 
-import { useForm } from 'react-hook-form'
-import { Toaster, toast } from 'sonner'
+import { useForm } from 'react-hook-form';
+import { Toaster, toast } from 'sonner';
 
 export default function FormLogin() {
   const signup = async (data) => {
     console.log('object');
-  }
+  };
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
-  } = useForm()
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    signup(data)
-    reset()
-  })
+    signup(data);
+    reset();
+  });
 
   return (
-    <form className='flex flex-col gap-4' onSubmit={onSubmit}>
+    <form
+      className='flex flex-col gap-4'
+      onSubmit={onSubmit}
+    >
       <div className='flex flex-col'>
         <label htmlFor='identificacion'>Numero de identificación</label>
         <input
@@ -33,7 +36,10 @@ export default function FormLogin() {
           className='bg-white/40 text-white outline-none p-1'
         />
         {errors.identificacion?.type === 'required' && (
-          <p role='alert' className='text-P-error'>
+          <p
+            role='alert'
+            className='text-P-error'
+          >
             Numero de identificación invalido
           </p>
         )}
@@ -50,7 +56,10 @@ export default function FormLogin() {
           className='bg-white/40 text-white outline-none p-1'
         />
         {errors.password?.type === 'required' && (
-          <p role='alert' className='text-P-error'>
+          <p
+            role='alert'
+            className='text-P-error'
+          >
             Contraseña invalida
           </p>
         )}
@@ -58,12 +67,12 @@ export default function FormLogin() {
 
       <button
         type='submit'
-        className='bg-primary w-max text-black rounded-lg py-2 px-6 hover:bg-primary/60 hover:text-white'>
+        className='bg-primary w-max text-black rounded-lg py-2 px-6 hover:bg-primary/60 hover:text-white'
+      >
         Iniciar Sesión
       </button>
 
       <Toaster richColors />
-
-    </form >
-  )
+    </form>
+  );
 }
