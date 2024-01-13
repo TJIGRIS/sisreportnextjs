@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 import { Toaster, toast } from 'sonner'
-import { getAllReports } from "../../server/utils/actions"
 
 
 export default function Table({ stateReport = 'search' }) {
@@ -15,7 +14,6 @@ export default function Table({ stateReport = 'search' }) {
   }
 
   useEffect(() => {
-    // getAllReports()
     isDashboard()
   }, [])
 

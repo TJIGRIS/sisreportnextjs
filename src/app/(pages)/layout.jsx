@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-import Navbar from '@/app/client/components/Navbar'
+import Navbar from '../client/components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +16,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div
           id="content"
-          class="p-2 container mx-auto gap-2 overflow-hidden h-screen"
+          className="p-2 container mx-auto gap-2 overflow-hidden h-screen"
         >
-          <header class="[grid-area:nav]">
+          <header className="[grid-area:nav]">
             <Navbar />
           </header>
 
-          <main class="[grid-area:main]">
+          <main className="[grid-area:main]">
             {children}
           </main>
         </div>
