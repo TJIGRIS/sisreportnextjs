@@ -1,6 +1,6 @@
-import Table from '../../client/components/Table';
+import Table from '../../client/components/Table'
 
-export default function page() {
+export default async function page() {
   return (
     <div className='bg-secondary rounded-lg grid grid-cols-1 lg:grid-cols-2 place-items-center place-content-center h-full'>
       <section className='w-full max-w-2xl lg:w-full text-gray-400 px-2 overflow-y-auto h-full'>
@@ -13,5 +13,5 @@ export default function page() {
         <Table stateReport={'Reparado'} />
       </section>
     </div>
-  );
+  )
 }

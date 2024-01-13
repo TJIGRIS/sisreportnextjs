@@ -1,19 +1,8 @@
-'use client';
+import { Toaster, toast } from 'sonner'
+import { getAllReports } from '../../server/utils/actions'
 
-import { useEffect } from 'react';
-import { Toaster, toast } from 'sonner';
-
-export default function Table({ stateReport = 'search' }) {
-  const reports = [];
-  const isDashboard = async () => {};
-
-  useEffect(() => {
-    isDashboard();
-  }, []);
-
-  const handleCheck = async (id) => {};
-
-  const handleDelete = async (id) => {};
+export default async function Table({ stateReport = 'search' }) {
+  const reports = await getAllReports()
 
   return (
     <div className='overflow-x-auto rounded-lg'>
@@ -54,7 +43,7 @@ export default function Table({ stateReport = 'search' }) {
         </thead>
         <tbody>
           {stateReport === 'search' &&
-            reports.map((report) => (
+            reports?.map((report) => (
               <tr
                 className='odd:bg-gray-500 even:bg-white text-black'
                 key={report._id}
@@ -83,7 +72,7 @@ export default function Table({ stateReport = 'search' }) {
             ))}
 
           {stateReport === 'Reportado' &&
-            reports.map((report) => {
+            reports?.map((report) => {
               if (!report.estado) {
                 return (
                   <tr
@@ -101,26 +90,26 @@ export default function Table({ stateReport = 'search' }) {
                     <td className='px-6 py-4'>{report.description}</td>
                     <td className='px-4 py-2 grid gap-2'>
                       <button
-                        onClick={() => handleCheck(report._id)}
+                        // onClick={() => handleCheck(report._id)}
                         className='text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-green-900 text-green-300'
                       >
                         Listo
                       </button>
 
                       <button
-                        onClick={() => handleDelete(report._id)}
+                        // onClick={() => handleDelete(report._id)}
                         className='text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-red-900 text-red-300'
                       >
                         Elimina
                       </button>
                     </td>
                   </tr>
-                );
+                )
               }
             })}
 
           {stateReport === 'Reparado' &&
-            reports.map((report) => {
+            reports?.map((report) => {
               if (report.estado) {
                 return (
                   <tr
@@ -142,7 +131,7 @@ export default function Table({ stateReport = 'search' }) {
                       </span>
                     </td>
                   </tr>
-                );
+                )
               }
             })}
         </tbody>
@@ -150,5 +139,5 @@ export default function Table({ stateReport = 'search' }) {
 
       <Toaster richColors />
     </div>
-  );
+  )
 }

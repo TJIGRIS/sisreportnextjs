@@ -1,21 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 export const connectionDB = async () => {
-  const isConnected = {};
+  const isConnected = {}
 
   try {
-    if (isConnected.db) return;
+    if (isConnected.db) return
 
     const db = await mongoose.connect(
-      'mongodb+srv://igrisdev:220502JAkt@cluster0.5oyfrrs.mongodb.net/?retryWrites=true&w=majority'
-    );
+      'mongodb+srv://root:root@cluster0.xzrgytm.mongodb.net/?retryWrites=true&w=majority'
+    )
 
-    isConnected.db = db.connections[0].readyState;
-
-    // console.log(db);
+    isConnected.db = db.connections[0].readyState
   } catch (error) {
-    console.log();
+    console.log()
   }
-};
-
-// "mongodb+srv://root:root@cluster0.xzrgytm.mongodb.net/?retryWrites=true&w=majority",
+}

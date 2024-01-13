@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const tecnicoSchema = new mongoose.Schema(
   {
@@ -19,8 +19,9 @@ const tecnicoSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-);
+)
 
-const Tecnico = mongoose.model("Tecnico", tecnicoSchema);
+const Tecnico =
+  mongoose.models.Tecnico || mongoose.model('Tecnico', tecnicoSchema)
 
-export default Tecnico;
+export default Tecnico

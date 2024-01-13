@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const reporteSchema = new mongoose.Schema(
   {
@@ -32,12 +32,13 @@ const reporteSchema = new mongoose.Schema(
     },
     tecnico: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Tecnico",
+      ref: 'Tecnico',
     },
   },
   { timestamps: true }
-);
+)
 
-const Reporte = mongoose.model("Reporte", reporteSchema);
+const Reporte =
+  mongoose.models.Reporte || mongoose.model('Reporte', reporteSchema)
 
-export default Reporte;
+export default Reporte
