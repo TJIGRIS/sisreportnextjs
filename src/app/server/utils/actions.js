@@ -12,14 +12,14 @@ export async function getAllReports() {
   }
 }
 
-export async function getFindReports({ formData }) {
-  try {
-    await connectionDB()
+// export async function getFindReports({ formData }) {
+//   try {
+//     await connectionDB()
 
-    const res = await Reporte.find()
+//     const res = await Reporte.find()
 
-    return res
-  } catch (error) {
-    console.log(error)
-  }
-}
+//     return res
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

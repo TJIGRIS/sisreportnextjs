@@ -1,10 +1,16 @@
-import Image from 'next/image';
-import Link from 'next/link';
+'use client'
 
-import Logo from '../../../../public/logo.png';
-import Line from '../../../../public/line.svg';
+import Image from 'next/image'
+import Link from 'next/link'
+
+import Logo from '../../../../public/logo.png'
+import Line from '../../../../public/line.svg'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
+  const pathname = usePathname()
+  console.log(pathname)
+
   return (
     <nav className='bg-secondary rounded-lg text-white h-full'>
       <div className='flex flex-wrap items-center justify-between mx-auto h-full p-4'>
@@ -24,7 +30,9 @@ export default function Navbar() {
         <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
           <Link
             href='/singin'
-            className='font-semibold hover:text-primary'
+            className={`font-semibold hover:text-primary ${
+              pathname == '/singin' && 'text-primary'
+            }`}
           >
             Iniciar Sesión
           </Link>
@@ -45,7 +53,9 @@ export default function Navbar() {
             <li>
               <Link
                 href='/'
-                className='block py-2 px-3 text-white rounded md:bg-transparent md:text-primary md:p-0'
+                className={`block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                  pathname == '/' && 'text-primary'
+                }`}
                 aria-current='page'
               >
                 Realizar Reporte
@@ -54,7 +64,9 @@ export default function Navbar() {
             <li>
               <Link
                 href='/searchreport'
-                className='block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0'
+                className={`block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                  pathname == '/searchreport' && 'text-primary'
+                }`}
               >
                 Buscar Reporte
               </Link>
@@ -63,5 +75,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

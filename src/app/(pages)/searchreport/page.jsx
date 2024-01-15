@@ -1,10 +1,8 @@
-'use client';
+import Image from 'next/image'
+import FormSearch from '../../client/components/FormSearch'
+import Table from '../../client/components/Table'
 
-import Image from 'next/image';
-import FormSearch from '../../client/components/FormSearch';
-import Table from '../../client/components/Table';
-
-import ImageSearch from '../../../../public/searchReport.svg';
+import ImageSearch from '../../../../public/searchReport.svg'
 
 export default function SearchReport() {
   return (
@@ -28,5 +26,5 @@ export default function SearchReport() {
         />
       </section>
     </div>
-  );
+  )
 }
