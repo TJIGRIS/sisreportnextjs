@@ -1,7 +1,8 @@
-import { getAllReports } from '../../server/utils/actions'
+import { useSearchParams } from 'next/navigation'
+import { getFindReports } from '../../server/utils/actions'
 
-export default async function Table() {
-  const reports = await getAllReports()
+export default async function Table({ query }) {
+  const reports = await getFindReports(query)
 
   return (
     <div className='overflow-x-auto rounded-lg'>

@@ -3,8 +3,11 @@ import FormSearch from '../../client/components/FormSearch'
 import Table from '../../client/components/Table'
 
 import ImageSearch from '../../../../public/searchReport.svg'
+import { Suspense } from 'react'
 
-export default function SearchReport() {
+export default async function SearchReport({ searchParams }) {
+  const query = searchParams?.query || ''
+
   return (
     <div className='relative bg-secondary rounded-lg grid grid-cols-1 place-content-start place-items-center h-full gap-2'>
       <section className='w-full max-w-4xl text-gray-400 px-2 z-10 pt-4 lg:pt-10'>
@@ -14,9 +17,14 @@ export default function SearchReport() {
         <FormSearch />
       </section>
 
-      <section className='max-w-4xl w-full z-10 px-2'>
-        <Table />
-      </section>
+      <Suspense
+        key={searchParams?.query}
+        fallback={<p>Cargando...</p>}
+      >
+        <section className='max-w-4xl w-full z-10 px-2'>
+          <Table query={query} />
+        </section>
+      </Suspense>
 
       <section className='place-items-center w-full h-full grid absolute opacity-30'>
         <Image

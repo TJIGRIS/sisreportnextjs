@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import ImageSend from '../../../public/sendReport.svg';
+import ImageSend from '../../../public/sendReport.svg'
 
-import FormMakeReports from '../client/components/FormMakeReports';
+import FormMakeReports from '../client/components/FormMakeReports'
 
 export default function Home() {
   return (
@@ -20,5 +20,5 @@ export default function Home() {
         <FormMakeReports />
       </section>
     </div>
-  );
+  )
 }

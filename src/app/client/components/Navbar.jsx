@@ -9,7 +9,6 @@ import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
-  console.log(pathname)
 
   return (
     <nav className='bg-secondary rounded-lg text-white h-full'>
@@ -31,7 +30,7 @@ export default function Navbar() {
           <Link
             href='/singin'
             className={`font-semibold hover:text-primary ${
-              pathname == '/singin' && 'text-primary'
+              pathname === '/singin' && 'text-primary'
             }`}
           >
             Iniciar Sesión
@@ -54,7 +53,7 @@ export default function Navbar() {
               <Link
                 href='/'
                 className={`block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                  pathname == '/' && 'text-primary'
+                  pathname === '/' && 'text-primary'
                 }`}
                 aria-current='page'
               >

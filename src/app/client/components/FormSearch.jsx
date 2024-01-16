@@ -1,29 +1,29 @@
-'use client';
+'use client'
 
-import { useForm } from 'react-hook-form';
-
-import Image from 'next/image';
-import Lupa from '../../../../public/lupa.svg';
+import Image from 'next/image'
+import Lupa from '../../../../public/lupa.svg'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useDebouncedCallback } from 'use-debounce'
 
 export default function FormSearch() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
 
-  async function searchReports({ ccEst }) {
-    console.log('');
-  }
+  const handleSearch = useDebouncedCallback((e) => {
+    const params = new URLSearchParams(searchParams)
 
-  const onSubmit = handleSubmit((ccEst) => {
-    searchReports(ccEst);
-    reset;
-  });
+    if (e) {
+      params.set('query', e)
+    } else {
+      params.delete('query')
+    }
+
+    replace(`${pathname}?${params}`)
+  }, 300)
 
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <label
         htmlFor='default-search'
         className='mb-2 text-sm font-medium text-gray-900 sr-only'
@@ -42,18 +42,12 @@ export default function FormSearch() {
         <input
           type='search'
           id='default-search'
-          {...register('ccEst', { required: true })}
           className='block w-full p-4 ps-10 text-sm rounded-lg bg-gray-500 focus:border-blue-500 outline-none text-white'
           placeholder='Documento Identidad, 1006...'
+          onChange={(e) => handleSearch(e.target.value)}
           required
         />
-        <button
-          type='submit'
-          className='text-black absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary/40 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2'
-        >
-          Search
-        </button>
       </div>
     </form>
-  );
+  )
 }
