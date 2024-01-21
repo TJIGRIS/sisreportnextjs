@@ -11,7 +11,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className='bg-secondary rounded-lg text-white h-full'>
+    <nav className='bg-secondary rounded-lg  h-full'>
       <div className='flex flex-wrap items-center justify-between mx-auto h-full p-4'>
         <Link
           href='/'
@@ -28,9 +28,9 @@ export default function Navbar() {
 
         <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
           <Link
-            href='/singin'
+            href='/login'
             className={`font-semibold hover:text-primary ${
-              pathname === '/singin' && 'text-primary'
+              pathname === '/login' && 'text-primary'
             }`}
           >
             Iniciar Sesión
@@ -52,8 +52,8 @@ export default function Navbar() {
             <li>
               <Link
                 href='/'
-                className={`block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                  pathname === '/' && 'text-primary'
+                className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                  pathname == '/' && '!text-primary bg-red-400'
                 }`}
                 aria-current='page'
               >
@@ -63,7 +63,7 @@ export default function Navbar() {
             <li>
               <Link
                 href='/searchreport'
-                className={`block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
                   pathname == '/searchreport' && 'text-primary'
                 }`}
               >

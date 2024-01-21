@@ -11,7 +11,7 @@ export async function getAllReports() {
 
     return res
   } catch (error) {
-    console.log(error)
+    return new Error(error)
   }
 }
 
@@ -23,7 +23,7 @@ export async function getFindReports(ccEst) {
 
     return res
   } catch (error) {
-    console.log(error)
+    return new Error(error)
   }
 }
 
@@ -36,7 +36,7 @@ export async function createReport(formData) {
 
     revalidatePath('/searchreport')
   } catch (error) {
-    console.log(error)
+    return new Error(error)
   }
 }
 
@@ -48,8 +48,9 @@ export async function updateReport(formData) {
     await Reporte.findByIdAndUpdate(id, { estado: true })
 
     revalidatePath('/dashboard')
+    return
   } catch (error) {
-    console.log(error)
+    return new Error(error)
   }
 }
 
@@ -61,7 +62,8 @@ export async function deleteReport(formData) {
     await Reporte.findByIdAndDelete(id)
 
     revalidatePath('/dashboard')
+    return
   } catch (error) {
-    console.log(error)
+    return new Error(error)
   }
 }

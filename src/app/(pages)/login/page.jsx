@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import ImageLogin from '../../../../public/loginReport.svg';
+import Image from 'next/image'
+import ImageLogin from '../../../../public/loginReport.svg'
 
-import FormLogin from '../../client/components/FormLogin';
+import FormLogin from '../../client/components/FormLogin'
 
 export default function page() {
   return (
@@ -19,5 +19,5 @@ export default function page() {
         <FormLogin />
       </section>
     </div>
-  );
+  )
 }

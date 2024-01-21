@@ -20,7 +20,7 @@ export default function FormSearch() {
     }
 
     replace(`${pathname}?${params}`)
-  }, 300)
+  }, 500)
 
   return (
     <form>

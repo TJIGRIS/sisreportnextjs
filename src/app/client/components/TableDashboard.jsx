@@ -1,11 +1,26 @@
-import {
-  deleteReport,
-  getAllReports,
-  updateReport,
-} from '../../server/utils/actions'
+'use client'
 
-export default async function TableDashboard({ stateReport = 'search' }) {
-  const reports = await getAllReports()
+import { deleteReport, updateReport } from '../../server/utils/actions'
+import { Toaster, toast } from 'sonner'
+
+export default function TableDashboard({ reports, stateReport = 'search' }) {
+  const handleDeleteReport = async (formData) => {
+    try {
+      await deleteReport(formData)
+      toast.success('Reporte eliminado')
+    } catch (error) {
+      toast.error('No se pudo eliminar el reporte')
+    }
+  }
+
+  const handleUpdateReport = async (formData) => {
+    try {
+      await updateReport(formData)
+      toast.success('Reporte Finalizado')
+    } catch (error) {
+      toast.error('No se pudo actualizar el reporte')
+    }
+  }
 
   return (
     <div className='overflow-x-auto rounded-lg'>
@@ -16,7 +31,7 @@ export default async function TableDashboard({ stateReport = 'search' }) {
               scope='col'
               className='px-6 py-3'
             >
-              Computador
+              N°
             </th>
             <th
               scope='col'
@@ -65,24 +80,24 @@ export default async function TableDashboard({ stateReport = 'search' }) {
                     <td className='px-6 py-4'>{report.salon}</td>
                     <td className='px-6 py-4'>{report.description}</td>
                     <td className='px-4 py-2 grid gap-2 w-full'>
-                      <form action={updateReport}>
+                      <form action={(formData) => handleUpdateReport(formData)}>
                         <input
                           type='hidden'
                           name='id'
                           id='id'
-                          defaultValue={report._id.toString()}
+                          defaultValue={report._id}
                         />
                         <button className='text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-green-900 text-green-300 w-full'>
                           Listo
                         </button>
                       </form>
 
-                      <form action={deleteReport}>
+                      <form action={(formData) => handleDeleteReport(formData)}>
                         <input
                           type='hidden'
                           name='id'
                           id='id'
-                          defaultValue={report._id.toString()}
+                          defaultValue={report._id}
                         />
                         <button className='text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-red-900 text-red-300 w-full'>
                           Eliminar
@@ -117,6 +132,8 @@ export default async function TableDashboard({ stateReport = 'search' }) {
             })}
         </tbody>
       </table>
+
+      <Toaster richColors />
     </div>
   )
 }
