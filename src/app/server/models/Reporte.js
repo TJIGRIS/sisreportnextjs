@@ -33,6 +33,7 @@ const reporteSchema = new mongoose.Schema(
     tecnico: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Tecnico',
+      required: false,
     },
   },
   { timestamps: true }

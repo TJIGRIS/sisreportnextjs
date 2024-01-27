@@ -4,6 +4,7 @@ import { deleteReport, updateReport } from '../../server/utils/actions'
 import { Toaster, toast } from 'sonner'
 
 export default function TableDashboard({ reports, stateReport = 'search' }) {
+
   const handleDeleteReport = async (formData) => {
     try {
       await deleteReport(formData)
@@ -23,7 +24,7 @@ export default function TableDashboard({ reports, stateReport = 'search' }) {
   }
 
   return (
-    <div className='overflow-x-auto rounded-lg'>
+    <div className='rounded-lg max-h-[40vh] lg:max-h-[80vh] overflow-auto'>
       <table className='w-full text-sm text-left text-gray-500 font-semibold'>
         <thead className='text-black uppercase bg-primary'>
           <tr>

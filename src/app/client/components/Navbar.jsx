@@ -49,27 +49,55 @@ export default function Navbar() {
           id='navbar-user'
         >
           <ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0'>
-            <li>
-              <Link
-                href='/'
-                className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                  pathname == '/' && '!text-primary bg-red-400'
-                }`}
-                aria-current='page'
-              >
-                Realizar Reporte
-              </Link>
-            </li>
-            <li>
-              <Link
-                href='/searchreport'
-                className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
-                  pathname == '/searchreport' && 'text-primary'
-                }`}
-              >
-                Buscar Reporte
-              </Link>
-            </li>
+            {pathname.includes('dashboard') ? (
+              <>
+                <li>
+                  <Link
+                    href='/dashboard'
+                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/' && '!text-primary bg-red-400'
+                    }`}
+                    aria-current='page'
+                  >
+                    Asignar Técnicos
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/dashboard/tablereports'
+                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/searchreport' && 'text-primary'
+                    }`}
+                  >
+                    Tabla Reportes
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    href='/'
+                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/' && '!text-primary bg-red-400'
+                    }`}
+                    aria-current='page'
+                  >
+                    Realizar Reporte
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/searchreport'
+                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/searchreport' && 'text-primary'
+                    }`}
+                  >
+                    Buscar Reporte
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

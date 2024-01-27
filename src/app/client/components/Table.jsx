@@ -1,19 +1,18 @@
-import { useSearchParams } from 'next/navigation'
 import { getFindReports } from '../../server/utils/actions'
 
 export default async function Table({ query }) {
   const reports = await getFindReports(query)
 
   return (
-    <div className='overflow-x-auto rounded-lg'>
-      <table className='w-full text-sm text-left text-gray-500 font-semibold'>
+    <div className='overflow-auto rounded-lg'>
+      <table className='text-sm text-left w-full text-gray-500 font-semibold'>
         <thead className='text-black uppercase bg-primary'>
           <tr>
             <th
               scope='col'
               className='px-6 py-3'
             >
-              Computador
+              #
             </th>
             <th
               scope='col'

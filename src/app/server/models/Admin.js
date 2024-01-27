@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const tecnicoSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     nombre: {
       type: String,
@@ -26,7 +26,6 @@ const tecnicoSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const Tecnico =
-  mongoose.models.Tecnico || mongoose.model('Tecnico', tecnicoSchema)
+const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema)
 
-export default Tecnico
+export default Admin

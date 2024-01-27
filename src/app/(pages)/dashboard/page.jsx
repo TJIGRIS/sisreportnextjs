@@ -1,10 +1,20 @@
+import { getAllReports, getAllTechniques } from '../../server/utils/actions'
+
+import CardTechniques from '../../client/components/CardTechniques'
 import TableDashboard from '../../client/components/TableDashboard'
-import { getAllReports } from '../../server/utils/actions'
 
 export default async function page() {
-  const reports = await getAllReports()
+  const techniques = await getAllTechniques()
+  const newTechniques = techniques.map((technique) => {
+    return {
+      id: technique._id,
+      name: technique.nombre,
+      rol: technique.rol,
+    }
+  })
 
-  const parseReports = reports.map((report) => ({
+  const reports = await getAllReports()
+  const newReports = reports.map((report) => ({
     _id: report._id.toString(),
     numeroComputador: report.numeroComputador,
     sede: report.sede,
@@ -14,22 +24,28 @@ export default async function page() {
   }))
 
   return (
-    <div className='bg-secondary rounded-lg grid grid-cols-1 lg:grid-cols-2 place-items-center place-content-center h-full'>
-      <section className='w-full max-w-2xl lg:w-full text-gray-400 px-2 overflow-y-auto h-full'>
-        <h1 className='text-4xl font-bold text-white mb-4'>Por Revisar</h1>
+    <>
+      <div className='bg-secondary rounded-md p-4'>
+        <h2 className='text-xl font-medium mb-4'>
+          Técnicos ({techniques.length})
+        </h2>
+        <div className='gridCardTechniques'>
+          {newTechniques.map((techniques) => (
+            <CardTechniques
+              key={techniques.id}
+              {...techniques}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className='bg-secondary rounded-md p-4'>
+        <h2 className='text-xl font-medium mb-4'>Reportes Nuevos</h2>
         <TableDashboard
-          reports={parseReports}
+          reports={newReports}
           stateReport={'Reportado'}
         />
-      </section>
-
-      <section className='w-full max-w-2xl lg:w-full text-gray-400 px-2'>
-        <h1 className='text-4xl font-bold text-white mb-4'>Reportes Listos</h1>
-        <TableDashboard
-          reports={parseReports}
-          stateReport={'Reparado'}
-        />
-      </section>
-    </div>
+      </div>
+    </>
   )
 }
