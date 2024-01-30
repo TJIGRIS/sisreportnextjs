@@ -32,7 +32,6 @@ export const addReportTechnique = async (formData) => {
   try {
     const idReport = formData.get('idReport')
     const idTechnique = formData.get('idTechnique')
-    console.log({ idReport, idTechnique })
 
     await connectionDB()
 
