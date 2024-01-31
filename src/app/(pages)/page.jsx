@@ -3,8 +3,16 @@ import Image from 'next/image'
 import ImageSend from '../../../public/sendReport.svg'
 
 import FormMakeReports from '../client/components/FormMakeReports'
+import { auth } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
+  const { userId } = auth()
+
+  if (userId) {
+    redirect('/dashboard')
+  }
+
   return (
     <div className='bg-secondary rounded-lg grid grid-cols-1 lg:grid-cols-2 place-items-center h-full'>
       <section className='hidden place-items-center lg:grid'>

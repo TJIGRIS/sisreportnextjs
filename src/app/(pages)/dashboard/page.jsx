@@ -2,8 +2,16 @@ import { getAllReports, getAllTechniques } from '../../server/utils/actions'
 
 import CardTechniques from '../../client/components/CardTechniques'
 import TableDashboard from '../../client/components/TableDashboard'
+import { auth } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
 export default async function page() {
+  const { userId } = auth()
+
+  if (!userId) {
+    redirect('/')
+  }
+
   const techniques = await getAllTechniques()
   const newTechniques = techniques.map((technique) => {
     return {
