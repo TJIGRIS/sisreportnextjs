@@ -34,7 +34,12 @@ export default function Navbar() {
           {isLoaded && user ? (
             <UserButton afterSignOutUrl='/' />
           ) : (
-            <Link href='/dashboard'>Iniciar Sesión</Link>
+            <Link
+              href='/dashboard'
+              className='hover:text-primary'
+            >
+              Iniciar Sesión
+            </Link>
           )}
 
           <button className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
@@ -50,13 +55,13 @@ export default function Navbar() {
           id='navbar-user'
         >
           <ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0'>
-            {pathname.includes('dashboard') ? (
+            {isLoaded && user ? (
               <>
                 <li>
                   <Link
                     href='/dashboard'
                     className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/' && '!text-primary bg-red-400'
+                      pathname == '/dashboard' && '!text-primary bg-red-400'
                     }`}
                     aria-current='page'
                   >
@@ -67,7 +72,7 @@ export default function Navbar() {
                   <Link
                     href='/dashboard/tablereports'
                     className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/searchreport' && 'text-primary'
+                      pathname == '/dashboard/tablereports' && 'text-primary'
                     }`}
                   >
                     Tabla Reportes
