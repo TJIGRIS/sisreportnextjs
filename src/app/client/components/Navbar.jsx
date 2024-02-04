@@ -5,14 +5,14 @@ import Link from 'next/link'
 
 import Logo from '../../../../public/logo.png'
 import Line from '../../../../public/line.svg'
-import { usePathname } from 'next/navigation'
 
-import { UserButton, useUser } from '@clerk/nextjs'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
 
-  const { user, isLoaded } = useUser()
+  const user = 1
+  const isLoaded = true
 
   return (
     <nav className='bg-secondary rounded-lg  h-full'>
@@ -32,7 +32,12 @@ export default function Navbar() {
 
         <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
           {isLoaded && user ? (
-            <UserButton afterSignOutUrl='/' />
+            <Link
+              href='/'
+              className='hover:text-primary'
+            >
+              Cerrar Sesión
+            </Link>
           ) : (
             <Link
               href='/dashboard'
@@ -60,9 +65,8 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/dashboard'
-                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/dashboard' && '!text-primary bg-red-400'
-                    }`}
+                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/dashboard' && '!text-primary bg-red-400'
+                      }`}
                     aria-current='page'
                   >
                     Asignar Técnicos
@@ -71,9 +75,8 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/dashboard/tablereports'
-                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/dashboard/tablereports' && 'text-primary'
-                    }`}
+                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/dashboard/tablereports' && 'text-primary'
+                      }`}
                   >
                     Tabla Reportes
                   </Link>
@@ -84,9 +87,8 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/'
-                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/' && '!text-primary bg-red-400'
-                    }`}
+                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/' && '!text-primary bg-red-400'
+                      }`}
                     aria-current='page'
                   >
                     Realizar Reporte
@@ -95,9 +97,8 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/searchreport'
-                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
-                      pathname == '/searchreport' && 'text-primary'
-                    }`}
+                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/searchreport' && 'text-primary'
+                      }`}
                   >
                     Buscar Reporte
                   </Link>

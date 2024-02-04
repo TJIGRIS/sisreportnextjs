@@ -3,8 +3,6 @@ import './globals.css'
 
 import Navbar from '../client/components/Navbar'
 
-import { ClerkProvider } from '@clerk/nextjs'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -14,21 +12,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang='en'>
-        <body className={inter.className}>
-          <div
-            id='content'
-            className='p-2 w-full lg:container mx-auto gap-2 overflow-hidden h-screen'
-          >
-            <header className='[grid-area:nav]'>
-              <Navbar />
-            </header>
+    <html lang='en'>
+      <body className={inter.className}>
+        <div
+          id='content'
+          className='p-2 w-full lg:container mx-auto gap-2 overflow-hidden h-screen'
+        >
+          <header className='[grid-area:nav]'>
+            <Navbar />
+          </header>
 
-            <main className='[grid-area:main] grid gap-2'>{children}</main>
-          </div>
-        </body>
-      </html>
-    </ClerkProvider>
+          <main className='[grid-area:main] grid gap-2'>{children}</main>
+        </div>
+      </body>
+    </html>
   )
 }
