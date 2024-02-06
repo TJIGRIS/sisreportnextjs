@@ -4,7 +4,6 @@ import { connectionDB } from '../utils/connectionDB'
 import Reporte from '../models/Reporte'
 import Tecnico from '../models/Tecnico'
 import { revalidatePath } from 'next/cache'
-import { report } from 'process'
 
 // action Techniques
 export async function getAllTechniques() {
@@ -71,6 +70,7 @@ export async function getFindReports(ccEst) {
 }
 
 export async function createReport(formData) {
+
   try {
     await connectionDB()
     const newReport = new Reporte(Object.fromEntries(formData))

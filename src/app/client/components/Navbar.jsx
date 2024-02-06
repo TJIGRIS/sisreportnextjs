@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation'
 export default function Navbar() {
   const pathname = usePathname()
 
-  const user = 1
+  const user = 100
   const isLoaded = true
 
   return (
@@ -40,7 +40,7 @@ export default function Navbar() {
             </Link>
           ) : (
             <Link
-              href='/dashboard'
+              href='/login'
               className='hover:text-primary'
             >
               Iniciar Sesión
