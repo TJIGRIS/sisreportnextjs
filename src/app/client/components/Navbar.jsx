@@ -8,11 +8,32 @@ import Line from '../../../../public/line.svg'
 
 import { usePathname } from 'next/navigation'
 
+import { useStoreSisReports } from '../store/auth'
+import { logout, validateLogin } from '../../server/utils/session'
+import { useEffect } from 'react'
+
 export default function Navbar() {
   const pathname = usePathname()
+  const { user, setUser, isLoaded, setIsLoaded } = useStoreSisReports(
+    (state) => state
+  )
 
-  const user = 100
-  const isLoaded = true
+  const handleSearchInfo = async () => {
+    const res = await validateLogin()
+
+    if (res.error) {
+      setUser({ name: null, rol: null, id: null })
+      setIsLoaded(false)
+      return
+    }
+
+    setUser({ name: res.name, rol: res.rol, id: res.id })
+    setIsLoaded(true)
+  }
+
+  useEffect(() => {
+    handleSearchInfo()
+  }, [])
 
   return (
     <nav className='bg-secondary rounded-lg  h-full'>
@@ -32,12 +53,12 @@ export default function Navbar() {
 
         <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
           {isLoaded && user ? (
-            <Link
-              href='/'
+            <button
+              onClick={logout}
               className='hover:text-primary'
             >
               Cerrar Sesión
-            </Link>
+            </button>
           ) : (
             <Link
               href='/login'
@@ -62,33 +83,40 @@ export default function Navbar() {
           <ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0'>
             {isLoaded && user ? (
               <>
-                <li>
-                  <Link
-                    href='/dashboard'
-                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/dashboard' && '!text-primary bg-red-400'
+                {user.rol === 'admin' && (
+                  <li>
+                    <Link
+                      href='/dashboard'
+                      className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                        pathname == '/dashboard' && '!text-primary bg-red-400'
                       }`}
-                    aria-current='page'
-                  >
-                    Asignar Técnicos
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/dashboard/tablereports'
-                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/dashboard/tablereports' && 'text-primary'
+                      aria-current='page'
+                    >
+                      Asignar Técnicos
+                    </Link>
+                  </li>
+                )}
+                {user.rol === 'technique' && (
+                  <li>
+                    <Link
+                      href='/dashboard/tablereports'
+                      className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                        pathname == '/dashboard/tablereports' && 'text-primary'
                       }`}
-                  >
-                    Tabla Reportes
-                  </Link>
-                </li>
+                    >
+                      Tabla Reportes
+                    </Link>
+                  </li>
+                )}
               </>
             ) : (
               <>
                 <li>
                   <Link
                     href='/'
-                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/' && '!text-primary bg-red-400'
-                      }`}
+                    className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/' && '!text-primary bg-red-400'
+                    }`}
                     aria-current='page'
                   >
                     Realizar Reporte
@@ -97,8 +125,9 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/searchreport'
-                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${pathname == '/searchreport' && 'text-primary'
-                      }`}
+                    className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                      pathname == '/searchreport' && 'text-primary'
+                    }`}
                   >
                     Buscar Reporte
                   </Link>

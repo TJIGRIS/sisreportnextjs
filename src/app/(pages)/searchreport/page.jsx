@@ -4,8 +4,22 @@ import Table from '../../client/components/Table'
 
 import ImageSearch from '../../../../public/searchReport.svg'
 import { Suspense } from 'react'
+import { validateLogin } from '../../server/utils/session'
+import Tecnico from '../../server/models/Tecnico'
 
 export default async function SearchReport({ searchParams }) {
+  const { id } = await validateLogin()
+
+  const tecnico = await Tecnico.findById(id)
+
+  if (tecnico?.rol === 'admin') {
+    redirect('/dashboard')
+  }
+
+  if (tecnico?.rol === 'technique') {
+    redirect('/dashboard/tablereports')
+  }
+
   const query = searchParams?.query || ''
 
   return (

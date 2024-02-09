@@ -4,14 +4,21 @@ import ImageSend from '../../../public/sendReport.svg'
 
 import FormMakeReports from '../client/components/FormMakeReports'
 import { redirect } from 'next/navigation'
+import { validateLogin } from '../server/utils/session'
+import Tecnico from '../server/models/Tecnico'
 
-export default function Home() {
-  const userId = 100
-  /* const { userId } = auth()
+export default async function Home() {
+  const { id } = await validateLogin()
 
-  if (userId) {
+  const tecnico = await Tecnico.findById(id)
+
+  if (tecnico?.rol === 'admin') {
     redirect('/dashboard')
-  } */
+  }
+
+  if (tecnico?.rol === 'technique') {
+    redirect('/dashboard/tablereports')
+  }
 
   return (
     <div className='bg-secondary rounded-lg grid grid-cols-1 lg:grid-cols-2 place-items-center h-full'>

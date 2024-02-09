@@ -1,11 +1,13 @@
 import TableDashboard from '../../../client/components/TableDashboard'
 import { getAllReports } from '../../../server/utils/actions'
+import { validateLogin } from '../../../server/utils/session'
 
 export default async function page() {
-  const session = '64c9436e723176c2ad8d9b0f'
+  const { id } = await validateLogin()
+
   const reports = await getAllReports()
   const newReports = reports.map((report) => {
-    if (report.tecnico?.toString() === session) {
+    if (report.tecnico?.toString() === id) {
       return {
         _id: report._id.toString(),
         numeroComputador: report.numeroComputador,
