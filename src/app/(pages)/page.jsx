@@ -10,14 +10,16 @@ import Tecnico from '../server/models/Tecnico'
 export default async function Home() {
   const { id } = await validateLogin()
 
-  const tecnico = await Tecnico.findById(id)
+  if (id) {
+    const tecnico = await Tecnico.findById(id)
 
-  if (tecnico?.rol === 'admin') {
-    redirect('/dashboard')
-  }
+    if (tecnico?.rol === 'admin') {
+      redirect('/dashboard')
+    }
 
-  if (tecnico?.rol === 'technique') {
-    redirect('/dashboard/tablereports')
+    if (tecnico?.rol === 'technique') {
+      redirect('/dashboard/tablereports')
+    }
   }
 
   return (
