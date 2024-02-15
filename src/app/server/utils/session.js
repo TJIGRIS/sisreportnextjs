@@ -5,7 +5,7 @@ import axios from 'axios'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
 import Tecnico from '../models/Tecnico'
-import { redirect } from 'next/dist/server/api-utils'
+import { redirect } from 'next/navigation'
 
 export const handleLogin = async (formData) => {
   try {
@@ -15,7 +15,7 @@ export const handleLogin = async (formData) => {
     )
 
     if (!token) {
-      return { error: 'Error al inicias sesión' }
+      return { error: 'Error al iniciar sesión' }
     }
 
     cookies().set('token', token.data)
@@ -25,7 +25,7 @@ export const handleLogin = async (formData) => {
     const tecnico = await Tecnico.findById(id)
 
     if (!tecnico) {
-      return { error: 'Error al inicias sesión 1' }
+      return { error: 'Error al iniciar sesión 1' }
     }
 
     return {
@@ -35,7 +35,7 @@ export const handleLogin = async (formData) => {
       id: tecnico._id,
     }
   } catch (error) {
-    return { error: 'Error al inicias sesión 2' }
+    return { error: 'Error al iniciar sesión 2' }
   }
 }
 
@@ -62,10 +62,16 @@ export const validateLogin = async () => {
       id: tecnico._id.toString(),
     }
   } catch (error) {
-    return { error: 'Error al inicias sesión 2' }
+    return { error: 'Error al iniciar sesión 2' }
   }
 }
 
-export const logout = () => {
-  cookies().delete('token')
+export const logout = async () => {
+  try {
+    cookies().delete('token')
+
+    return { ok: 'ok' }
+  } catch (error) {
+    return { error: 'Error al cerrar sesión' }
+  }
 }

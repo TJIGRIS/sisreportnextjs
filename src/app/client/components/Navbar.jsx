@@ -6,11 +6,12 @@ import Link from 'next/link'
 import Logo from '../../../../public/logo.png'
 import Line from '../../../../public/line.svg'
 
-import { usePathname } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 
 import { useStoreSisReports } from '../store/auth'
 import { logout, validateLogin } from '../../server/utils/session'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -29,6 +30,14 @@ export default function Navbar() {
 
     setUser({ name: res.name, rol: res.rol, id: res.id })
     setIsLoaded(true)
+  }
+
+  const handleLogout = async () => {
+    const res = await logout()
+
+    if (res.ok) {
+      redirect('/')
+    }
   }
 
   useEffect(() => {
@@ -53,12 +62,9 @@ export default function Navbar() {
 
         <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
           {isLoaded && user ? (
-            <button
-              onClick={logout}
-              className='hover:text-primary'
-            >
-              Cerrar Sesión
-            </button>
+            <form action={() => handleLogout()}>
+              <button className='hover:text-primary'>Cerrar Sesión</button>
+            </form>
           ) : (
             <Link
               href='/login'
