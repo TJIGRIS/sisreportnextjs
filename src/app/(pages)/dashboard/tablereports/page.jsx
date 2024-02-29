@@ -1,6 +1,5 @@
 import TableDashboard from '../../../client/components/TableDashboard'
-import { getAllReports } from '../../../server/utils/actions'
-import { validateLogin } from '../../../server/utils/session'
+import { getAllReports, validateLogin } from '../../../server/utils/actions'
 
 export default async function page() {
   const { id } = await validateLogin()

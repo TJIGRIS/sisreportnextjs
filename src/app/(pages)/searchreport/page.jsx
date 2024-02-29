@@ -4,8 +4,8 @@ import Table from '../../client/components/Table'
 
 import ImageSearch from '../../../../public/searchReport.svg'
 import { Suspense } from 'react'
-import { validateLogin } from '../../server/utils/session'
 import Tecnico from '../../server/models/Tecnico'
+import { validateLogin } from '../../server/utils/actions'
 
 export default async function SearchReport({ searchParams }) {
   const { id } = await validateLogin()
