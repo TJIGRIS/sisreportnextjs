@@ -9,9 +9,10 @@ import Line from '../../../../public/line.svg'
 import { redirect, usePathname } from 'next/navigation'
 
 import { useStoreSisReports } from '../store/auth'
-import { logout, validateLogin } from '../../server/utils/session'
+// import { logout, validateLogin } from '../../server/utils/session'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { logout, validateLogin } from '../../server/utils/actions'
 
 export default function Navbar() {
   const pathname = usePathname()

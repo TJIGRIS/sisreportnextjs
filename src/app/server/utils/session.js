@@ -1,4 +1,4 @@
-'use server'
+/* 'use server'
 
 import axios from 'axios'
 
@@ -75,3 +75,4 @@ export const logout = async () => {
     return { error: 'Error al cerrar sesión' }
   }
 }
+ */

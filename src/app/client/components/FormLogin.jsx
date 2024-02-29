@@ -1,9 +1,9 @@
 'use client'
 
-import { handleLogin } from '../../server/utils/session'
 import { Toaster, toast } from 'sonner'
 import { useStoreSisReports } from '../store/auth'
 import { redirect } from 'next/navigation'
+import { handleLogin } from '../../server/utils/actions'
 
 export default function FormLogin() {
   const { setUser, setIsLoaded } = useStoreSisReports((state) => state)

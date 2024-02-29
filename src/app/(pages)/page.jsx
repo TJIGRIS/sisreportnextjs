@@ -4,8 +4,9 @@ import ImageSend from '../../../public/sendReport.svg'
 
 import FormMakeReports from '../client/components/FormMakeReports'
 import { redirect } from 'next/navigation'
-import { validateLogin } from '../server/utils/session'
+// import { validateLogin } from '../server/utils/session'
 import Tecnico from '../server/models/Tecnico'
+import { validateLogin } from '../server/utils/actions'
 
 export default async function Home() {
   const { id } = await validateLogin()
