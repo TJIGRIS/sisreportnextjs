@@ -10,7 +10,7 @@ import { redirect, usePathname } from 'next/navigation'
 
 import { useStoreSisReports } from '../store/auth'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { logout, validateLogin } from '../../server/utils/actions'
 
 export default function Navbar() {
@@ -18,6 +18,33 @@ export default function Navbar() {
   const { user, setUser, isLoaded, setIsLoaded } = useStoreSisReports(
     (state) => state
   )
+
+  const [matchMedia, setMatchMedia] = useState(false)
+  const [toggle, setToggle] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)')
+
+    const handleMediaQueryChange = (mediaQueryList) => {
+      if (mediaQueryList.matches) {
+        setMatchMedia(true)
+      } else {
+        setMatchMedia(false)
+      }
+    }
+
+    handleMediaQueryChange(mediaQuery)
+
+    mediaQuery.addListener(handleMediaQueryChange)
+
+    return () => {
+      mediaQuery.removeListener(handleMediaQueryChange)
+    }
+  }, [])
+
+  const handleToggle = () => {
+    setToggle((prev) => !prev)
+  }
 
   const handleSearchInfo = async () => {
     const res = await validateLogin()
@@ -57,10 +84,10 @@ export default function Navbar() {
             alt={'logo unimayor'}
           />
 
-          <span className='self-center text-xl'>SisReports</span>
+          <span className='self-center text-xl'>SisReport</span>
         </Link>
 
-        <div className='flex items-center md:order-2 space-x-3 md:space-x-0'>
+        <div className='flex items-center md:order-2 space-x-3 md:space-x-0 '>
           {isLoaded && user ? (
             <form action={() => handleLogout()}>
               <button className='hover:text-primary'>Cerrar Sesión</button>
@@ -68,18 +95,82 @@ export default function Navbar() {
           ) : (
             <Link
               href='/login'
-              className='hover:text-primary'
+              className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                pathname == '/login' && '!text-primary '
+              }`}
             >
               Iniciar Sesión
             </Link>
           )}
 
-          <button className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
+          <button
+            className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'
+            onClick={handleToggle}
+          >
             <Image
               src={Line}
               alt='Line'
             />
           </button>
+
+          {matchMedia && toggle && (
+            <ul className='absolute right-8 top-24 p-2 bg-ternary rounded-sm z-40'>
+              {isLoaded && user ? (
+                <>
+                  {user.rol === 'admin' && (
+                    <li>
+                      <Link
+                        href='/dashboard'
+                        className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                          pathname == '/dashboard' && '!text-primary bg-red-400'
+                        }`}
+                        aria-current='page'
+                      >
+                        Asignar Técnicos
+                      </Link>
+                    </li>
+                  )}
+                  {user.rol === 'technique' && (
+                    <li>
+                      <Link
+                        href='/dashboard/tablereports'
+                        className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                          pathname == '/dashboard/tablereports' &&
+                          'text-primary'
+                        }`}
+                      >
+                        Tabla Reportes
+                      </Link>
+                    </li>
+                  )}
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      href='/'
+                      className={`block py-2 px-3  rounded md:bg-transparent md:hover:text-primary md:p-0 ${
+                        pathname == '/' && '!text-primary bg-red-400'
+                      }`}
+                      aria-current='page'
+                    >
+                      Realizar Reporte
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href='/searchreport'
+                      className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 ${
+                        pathname == '/searchreport' && 'text-primary'
+                      }`}
+                    >
+                      Buscar Reporte
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          )}
         </div>
 
         <div
